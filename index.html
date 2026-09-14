@@ -425,6 +425,22 @@
 
   colocarFechaActual();
 
+  // MAYÚSCULA AL INICIO DE CADA NOMBRE Y APELLIDO
+  const nombreInput = document.getElementById("nombre");
+
+  nombreInput.addEventListener("input", function() {
+
+    const posicionCursor = this.selectionStart;
+
+    this.value = this.value
+      .toLowerCase()
+      .replace(/(^|\s)\S/g, function(letra) {
+        return letra.toUpperCase();
+      });
+
+    this.setSelectionRange(posicionCursor, posicionCursor);
+  });
+
   // FORMATO AUTOMÁTICO DE IDENTIDAD
   const identidadInput = document.getElementById("identidad");
 
