@@ -77,10 +77,6 @@
       cursor: pointer;
     }
 
-    .login-card button:hover {
-      background: #0b5f59;
-    }
-
     .error-login {
       color: #dc2626;
       text-align: center;
@@ -304,8 +300,6 @@
 
 <body>
 
-<!-- LOGIN -->
-
 <div id="login" class="login-container">
   <div class="login-card">
 
@@ -334,9 +328,6 @@
 
   </div>
 </div>
-
-
-<!-- CAMBIO DE CONTRASEÑA -->
 
 <div id="cambioContrasena" class="login-container" style="display:none;">
   <div class="login-card">
@@ -370,9 +361,6 @@
   </div>
 </div>
 
-
-<!-- PLATAFORMA -->
-
 <div id="plataforma">
 
 <header>
@@ -393,7 +381,6 @@
   </button>
 
 </header>
-
 
 <div class="container">
 
@@ -522,7 +509,6 @@
 
   </div>
 
-
   <div class="card">
 
     <h2>Emprendedores registrados</h2>
@@ -578,31 +564,25 @@
 
 </div>
 
-
 <script>
 
   const USUARIO_CORRECTO = "Dorita.Pavon";
   const CONTRASENA_INICIAL = "123456";
   const FECHA_INICIO_REGISTRO = "2026-09-14";
 
-
   function obtenerContrasenaActual() {
-
     const guardada =
       localStorage.getItem("contrasenaFeria");
 
     return guardada || CONTRASENA_INICIAL;
   }
 
-
   function cambioYaRealizado() {
-
     return (
       localStorage.getItem("cambioContrasenaRealizado")
       === "si"
     );
   }
-
 
   function iniciarSesion() {
 
@@ -617,7 +597,6 @@
         .getElementById("contrasena")
         .value;
 
-
     if (
       usuario === USUARIO_CORRECTO &&
       contrasena === obtenerContrasenaActual()
@@ -626,7 +605,6 @@
       document
         .getElementById("errorLogin")
         .textContent = "";
-
 
       if (!cambioYaRealizado()) {
 
@@ -641,7 +619,6 @@
         return;
       }
 
-
       abrirPlataforma();
 
     } else {
@@ -652,7 +629,6 @@
         "Usuario o contraseña incorrectos.";
     }
   }
-
 
   function guardarNuevaContrasena() {
 
@@ -666,7 +642,6 @@
         .getElementById("confirmarContrasena")
         .value;
 
-
     if (nueva.length < 6) {
 
       document
@@ -676,7 +651,6 @@
 
       return;
     }
-
 
     if (nueva !== confirmar) {
 
@@ -688,7 +662,6 @@
       return;
     }
 
-
     if (nueva === CONTRASENA_INICIAL) {
 
       document
@@ -699,25 +672,20 @@
       return;
     }
 
-
     localStorage.setItem(
       "contrasenaFeria",
       nueva
     );
-
 
     localStorage.setItem(
       "cambioContrasenaRealizado",
       "si"
     );
 
-
     alert("Contraseña actualizada correctamente.");
-
 
     abrirPlataforma();
   }
-
 
   function abrirPlataforma() {
 
@@ -738,7 +706,6 @@
       "activa"
     );
   }
-
 
   function cerrarSesion() {
 
@@ -767,7 +734,6 @@
       .value = "";
   }
 
-
   document
     .getElementById("contrasena")
     .addEventListener(
@@ -780,7 +746,6 @@
       }
     );
 
-
   if (
     sessionStorage.getItem("sesionFeria")
     === "activa"
@@ -788,16 +753,13 @@
     abrirPlataforma();
   }
 
-
   let emprendedores =
     JSON.parse(
       localStorage.getItem("emprendedores")
     ) || [];
 
-
   const formulario =
     document.getElementById("formEmprendedor");
-
 
   function fechaHoy() {
 
@@ -814,7 +776,6 @@
     return `${anio}-${mes}-${dia}`;
   }
 
-
   function fechaRegistroPermitida() {
 
     const hoy = fechaHoy();
@@ -823,7 +784,6 @@
       ? FECHA_INICIO_REGISTRO
       : hoy;
   }
-
 
   function colocarFechaActual() {
 
@@ -839,13 +799,10 @@
     }
   }
 
-
   colocarFechaActual();
-
 
   const nombreInput =
     document.getElementById("nombre");
-
 
   nombreInput.addEventListener("input", function() {
 
@@ -861,10 +818,8 @@
     this.setSelectionRange(cursor, cursor);
   });
 
-
   const identidadInput =
     document.getElementById("identidad");
-
 
   identidadInput.addEventListener("input", function() {
 
@@ -872,7 +827,6 @@
       this.value
         .replace(/\D/g, "")
         .slice(0, 13);
-
 
     if (numeros.length <= 4) {
 
@@ -896,10 +850,8 @@
     }
   });
 
-
   const telefonoInput =
     document.getElementById("telefono");
-
 
   telefonoInput.addEventListener("input", function() {
 
@@ -907,7 +859,6 @@
       this.value
         .replace(/\D/g, "")
         .slice(0,8);
-
 
     if (numeros.length <= 4) {
 
@@ -931,14 +882,12 @@
     }
   });
 
-
   formulario.addEventListener("submit", function(event) {
 
     event.preventDefault();
 
     const fechaSeleccionada =
       document.getElementById("fecha").value;
-
 
     if (
       fechaSeleccionada < FECHA_INICIO_REGISTRO
@@ -951,10 +900,8 @@
       return;
     }
 
-
     const indiceEditar =
       document.getElementById("indiceEditar").value;
-
 
     const emprendedor = {
 
@@ -986,7 +933,6 @@
         document.getElementById("observaciones").value.trim()
     };
 
-
     if (indiceEditar === "") {
 
       emprendedores.push(emprendedor);
@@ -1000,12 +946,10 @@
       alert("Ficha actualizada correctamente.");
     }
 
-
     guardarDatos();
     limpiarFormulario();
     mostrarEmprendedores();
   });
-
 
   function guardarDatos() {
 
@@ -1014,7 +958,6 @@
       JSON.stringify(emprendedores)
     );
   }
-
 
   function mostrarEmprendedores() {
 
@@ -1028,7 +971,6 @@
         .toLowerCase();
 
     tabla.innerHTML = "";
-
 
     const resultados =
       emprendedores.filter(function(e) {
@@ -1058,7 +1000,6 @@
             .includes(busqueda)
         );
       });
-
 
     if (resultados.length === 0) {
 
@@ -1114,13 +1055,11 @@
       });
     }
 
-
     document.getElementById("contador").textContent =
       "Total: " +
       emprendedores.length +
       " emprendedores";
   }
-
 
   function editarEmprendedor(indice) {
 
@@ -1165,7 +1104,6 @@
     });
   }
 
-
   function eliminarEmprendedor(indice) {
 
     const confirmar =
@@ -1182,7 +1120,6 @@
     mostrarEmprendedores();
   }
 
-
   function limpiarFormulario() {
 
     formulario.reset();
@@ -1197,7 +1134,6 @@
     document.getElementById("nombre").focus();
   }
 
-
   function exportarExcel() {
 
     if (emprendedores.length === 0) {
@@ -1208,7 +1144,6 @@
 
       return;
     }
-
 
     let contenido =
       "\uFEFFFeria Aniversario de la Capital\n" +
@@ -1224,7 +1159,6 @@
       "Actividad económica;" +
       "Fecha de registro;" +
       "Observaciones\n";
-
 
     emprendedores.forEach(function(e) {
 
@@ -1242,7 +1176,6 @@
 
       ];
 
-
       contenido +=
         fila.map(function(valor) {
 
@@ -1256,7 +1189,6 @@
         }).join(";") + "\n";
     });
 
-
     const archivo =
       new Blob(
         [contenido],
@@ -1265,23 +1197,18 @@
         }
       );
 
-
     const url =
       URL.createObjectURL(archivo);
-
 
     const enlace =
       document.createElement("a");
 
-
     enlace.href = url;
-
 
     enlace.download =
       "Feria_Aniversario_Capital_Emprendedores_" +
       fechaHoy() +
       ".csv";
-
 
     document.body.appendChild(enlace);
 
@@ -1292,14 +1219,12 @@
     URL.revokeObjectURL(url);
   }
 
-
   const camposFormulario =
     Array.from(
       document.querySelectorAll(
         '#formEmprendedor input:not([type="hidden"]), #formEmprendedor textarea'
       )
     );
-
 
   camposFormulario.forEach(function(campo, indice) {
 
@@ -1329,7 +1254,6 @@
       }
     });
   });
-
 
   mostrarEmprendedores();
 
