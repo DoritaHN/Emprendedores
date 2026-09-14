@@ -265,7 +265,8 @@
           <input
             type="tel"
             id="telefono"
-            placeholder="Ej. 9999-9999"
+            maxlength="10"
+            placeholder="0000-00-00"
             required
           >
         </div>
@@ -424,6 +425,7 @@
 
   colocarFechaActual();
 
+  // FORMATO AUTOMÁTICO DE IDENTIDAD
   const identidadInput = document.getElementById("identidad");
 
   identidadInput.addEventListener("input", function() {
@@ -446,6 +448,34 @@
         numeros.slice(4, 8) +
         "-" +
         numeros.slice(8, 13);
+    }
+
+    this.value = formato;
+  });
+
+  // FORMATO AUTOMÁTICO DE TELÉFONO
+  const telefonoInput = document.getElementById("telefono");
+
+  telefonoInput.addEventListener("input", function() {
+
+    let numeros = this.value.replace(/\D/g, "").slice(0, 8);
+
+    let formato = "";
+
+    if (numeros.length <= 4) {
+      formato = numeros;
+    } else if (numeros.length <= 6) {
+      formato =
+        numeros.slice(0, 4) +
+        "-" +
+        numeros.slice(4);
+    } else {
+      formato =
+        numeros.slice(0, 4) +
+        "-" +
+        numeros.slice(4, 6) +
+        "-" +
+        numeros.slice(6, 8);
     }
 
     this.value = formato;
@@ -708,6 +738,7 @@
     URL.revokeObjectURL(enlace.href);
   }
 
+  // ENTER PARA PASAR AL SIGUIENTE CAMPO
   const camposFormulario = Array.from(
     document.querySelectorAll(
       '#formEmprendedor input:not([type="hidden"]), #formEmprendedor textarea'
