@@ -110,6 +110,11 @@
       margin-top: 8px;
     }
 
+    .usuario-activo {
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
     .cerrar-sesion {
       margin-top: 14px;
       background: white;
@@ -250,7 +255,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 1050px;
+      min-width: 1100px;
     }
 
     th {
@@ -300,66 +305,95 @@
 
 <body>
 
+<!-- INICIO DE SESIÓN -->
+
 <div id="login" class="login-container">
+
   <div class="login-card">
 
     <h1>Feria Aniversario de la Capital</h1>
-    <p>Acceso al Registro de Emprendedores</p>
+
+    <p>Acceso de Administradores</p>
 
     <label>Usuario</label>
+
     <input
       type="text"
       id="usuario"
       placeholder="Ingrese su usuario"
+      autocomplete="username"
     >
 
     <label>Contraseña</label>
+
     <input
       type="password"
       id="contrasena"
       placeholder="Ingrese su contraseña"
+      autocomplete="current-password"
     >
 
     <button onclick="iniciarSesion()">
       Ingresar
     </button>
 
-    <div id="errorLogin" class="error-login"></div>
+    <div
+      id="errorLogin"
+      class="error-login"
+    ></div>
 
   </div>
+
 </div>
 
-<div id="cambioContrasena" class="login-container" style="display:none;">
+
+<!-- CAMBIO DE CONTRASEÑA -->
+
+<div
+  id="cambioContrasena"
+  class="login-container"
+  style="display:none;"
+>
+
   <div class="login-card">
 
     <h1>Cambiar contraseña</h1>
 
     <p>
-      Por seguridad, debe cambiar la contraseña inicial antes de continuar.
+      Por seguridad debe cambiar su contraseña inicial antes de continuar.
     </p>
 
     <label>Nueva contraseña</label>
+
     <input
       type="password"
       id="nuevaContrasena"
-      placeholder="Ingrese nueva contraseña"
+      placeholder="Nueva contraseña"
     >
 
     <label>Confirmar nueva contraseña</label>
+
     <input
       type="password"
       id="confirmarContrasena"
-      placeholder="Repita la nueva contraseña"
+      placeholder="Repita la contraseña"
     >
 
     <button onclick="guardarNuevaContrasena()">
       Guardar nueva contraseña
     </button>
 
-    <div id="errorCambio" class="error-login"></div>
+    <div
+      id="errorCambio"
+      class="error-login"
+    ></div>
 
   </div>
+
 </div>
+
+
+<!-- PLATAFORMA -->
 
 <div id="plataforma">
 
@@ -373,6 +407,11 @@
     Feria: 19 de septiembre de 2026
   </div>
 
+  <div
+    id="usuarioActivo"
+    class="usuario-activo"
+  ></div>
+
   <button
     class="cerrar-sesion"
     onclick="cerrarSesion()"
@@ -382,6 +421,7 @@
 
 </header>
 
+
 <div class="container">
 
   <div class="card">
@@ -390,32 +430,45 @@
 
     <form id="formEmprendedor">
 
-      <input type="hidden" id="indiceEditar">
+      <input
+        type="hidden"
+        id="indiceEditar"
+      >
 
       <div class="form-grid">
 
         <div class="campo">
+
           <label>Nombre completo *</label>
+
           <input
             type="text"
             id="nombre"
             placeholder="Ej. María José López Martínez"
             required
           >
+
         </div>
 
+
         <div class="campo">
+
           <label>Número de identidad</label>
+
           <input
             type="text"
             id="identidad"
             maxlength="15"
             placeholder="0000-0000-00000"
           >
+
         </div>
 
+
         <div class="campo">
+
           <label>Teléfono *</label>
+
           <input
             type="tel"
             id="telefono"
@@ -423,47 +476,67 @@
             placeholder="0000-00-00"
             required
           >
+
         </div>
 
+
         <div class="campo">
+
           <label>Ciudad o aldea</label>
+
           <input
             type="text"
             id="municipio"
             placeholder="Ej. Tegucigalpa"
           >
+
         </div>
 
+
         <div class="campo">
+
           <label>Colonia</label>
+
           <input
             type="text"
             id="colonia"
             placeholder="Ej. Colonia Kennedy"
           >
+
         </div>
 
+
         <div class="campo">
+
           <label>Nombre del emprendimiento *</label>
+
           <input
             type="text"
             id="emprendimiento"
             placeholder="Ej. Dulces María"
             required
           >
+
         </div>
 
+
         <div class="campo">
+
           <label>Actividad económica</label>
+
           <input
             type="text"
             id="rubro"
             placeholder="Ej. Alimentos, comercio, artesanía"
           >
+
         </div>
 
+
         <div class="campo">
+
           <label>Fecha de registro</label>
+
           <input
             type="date"
             id="fecha"
@@ -473,17 +546,23 @@
           <div class="nota-fecha">
             Los registros inician el 14 de septiembre de 2026.
           </div>
+
         </div>
 
+
         <div class="campo campo-completo">
+
           <label>Observaciones</label>
+
           <textarea
             id="observaciones"
             placeholder="Escribe aquí información adicional..."
           ></textarea>
+
         </div>
 
       </div>
+
 
       <div class="botones">
 
@@ -509,11 +588,15 @@
 
   </div>
 
+
   <div class="card">
 
     <h2>Emprendedores registrados</h2>
 
-    <div class="contador" id="contador">
+    <div
+      class="contador"
+      id="contador"
+    >
       Total: 0 emprendedores
     </div>
 
@@ -538,7 +621,9 @@
       <table>
 
         <thead>
+
           <tr>
+
             <th>Nombre completo</th>
             <th>Identidad</th>
             <th>Teléfono</th>
@@ -549,7 +634,9 @@
             <th>Fecha de registro</th>
             <th>Observaciones</th>
             <th>Acciones</th>
+
           </tr>
+
         </thead>
 
         <tbody id="tablaEmprendedores"></tbody>
@@ -564,25 +651,57 @@
 
 </div>
 
+
 <script>
 
-  const USUARIO_CORRECTO = "Dorita.Pavon";
+  /* ==============================
+     ADMINISTRADORES
+  ============================== */
+
   const CONTRASENA_INICIAL = "123456";
+
+  const ADMINISTRADORES = [
+    "Dorita.Pavon",
+    "Luis.Pinel",
+    "ririas"
+  ];
+
   const FECHA_INICIO_REGISTRO = "2026-09-14";
 
-  function obtenerContrasenaActual() {
+  let administradorTemporal = null;
+
+
+  function claveContrasena(usuario) {
+    return "contrasena_" + usuario;
+  }
+
+
+  function obtenerContrasena(usuario) {
+
     const guardada =
-      localStorage.getItem("contrasenaFeria");
+      localStorage.getItem(
+        claveContrasena(usuario)
+      );
 
     return guardada || CONTRASENA_INICIAL;
   }
 
-  function cambioYaRealizado() {
+
+  function cambioYaRealizado(usuario) {
+
     return (
-      localStorage.getItem("cambioContrasenaRealizado")
-      === "si"
+      localStorage.getItem(
+        "cambioContrasena_" + usuario
+      ) === "si"
     );
   }
+
+
+  function usuarioExiste(usuario) {
+
+    return ADMINISTRADORES.includes(usuario);
+  }
+
 
   function iniciarSesion() {
 
@@ -597,16 +716,20 @@
         .getElementById("contrasena")
         .value;
 
+
     if (
-      usuario === USUARIO_CORRECTO &&
-      contrasena === obtenerContrasenaActual()
+      usuarioExiste(usuario) &&
+      contrasena === obtenerContrasena(usuario)
     ) {
 
       document
         .getElementById("errorLogin")
         .textContent = "";
 
-      if (!cambioYaRealizado()) {
+      administradorTemporal = usuario;
+
+
+      if (!cambioYaRealizado(usuario)) {
 
         document
           .getElementById("login")
@@ -619,7 +742,8 @@
         return;
       }
 
-      abrirPlataforma();
+
+      abrirPlataforma(usuario);
 
     } else {
 
@@ -629,6 +753,7 @@
         "Usuario o contraseña incorrectos.";
     }
   }
+
 
   function guardarNuevaContrasena() {
 
@@ -642,6 +767,18 @@
         .getElementById("confirmarContrasena")
         .value;
 
+
+    if (!administradorTemporal) {
+
+      document
+        .getElementById("errorCambio")
+        .textContent =
+        "No se pudo identificar el administrador.";
+
+      return;
+    }
+
+
     if (nueva.length < 6) {
 
       document
@@ -651,6 +788,7 @@
 
       return;
     }
+
 
     if (nueva !== confirmar) {
 
@@ -662,32 +800,47 @@
       return;
     }
 
+
     if (nueva === CONTRASENA_INICIAL) {
 
       document
         .getElementById("errorCambio")
         .textContent =
-        "La nueva contraseña debe ser diferente de 123456.";
+        "Debe elegir una contraseña diferente de 123456.";
 
       return;
     }
 
+
     localStorage.setItem(
-      "contrasenaFeria",
+      claveContrasena(administradorTemporal),
       nueva
     );
 
+
     localStorage.setItem(
-      "cambioContrasenaRealizado",
+      "cambioContrasena_" + administradorTemporal,
       "si"
     );
 
-    alert("Contraseña actualizada correctamente.");
 
-    abrirPlataforma();
+    document
+      .getElementById("errorCambio")
+      .textContent = "";
+
+
+    alert(
+      "Contraseña actualizada correctamente."
+    );
+
+
+    abrirPlataforma(
+      administradorTemporal
+    );
   }
 
-  function abrirPlataforma() {
+
+  function abrirPlataforma(usuario) {
 
     document
       .getElementById("login")
@@ -701,17 +854,38 @@
       .getElementById("plataforma")
       .style.display = "block";
 
+
+    document
+      .getElementById("usuarioActivo")
+      .textContent =
+      "Administrador: " + usuario;
+
+
     sessionStorage.setItem(
       "sesionFeria",
       "activa"
     );
+
+    sessionStorage.setItem(
+      "administradorActivo",
+      usuario
+    );
   }
+
 
   function cerrarSesion() {
 
     sessionStorage.removeItem(
       "sesionFeria"
     );
+
+    sessionStorage.removeItem(
+      "administradorActivo"
+    );
+
+
+    administradorTemporal = null;
+
 
     document
       .getElementById("plataforma")
@@ -725,6 +899,7 @@
       .getElementById("login")
       .style.display = "flex";
 
+
     document
       .getElementById("usuario")
       .value = "";
@@ -732,7 +907,17 @@
     document
       .getElementById("contrasena")
       .value = "";
+
+
+    document
+      .getElementById("nuevaContrasena")
+      .value = "";
+
+    document
+      .getElementById("confirmarContrasena")
+      .value = "";
   }
+
 
   document
     .getElementById("contrasena")
@@ -746,35 +931,65 @@
       }
     );
 
+
+  const sesionActiva =
+    sessionStorage.getItem(
+      "sesionFeria"
+    );
+
+  const adminActivo =
+    sessionStorage.getItem(
+      "administradorActivo"
+    );
+
+
   if (
-    sessionStorage.getItem("sesionFeria")
-    === "activa"
+    sesionActiva === "activa" &&
+    adminActivo
   ) {
-    abrirPlataforma();
+
+    abrirPlataforma(
+      adminActivo
+    );
   }
+
+
+  /* ==============================
+     DATOS DE EMPRENDEDORES
+  ============================== */
 
   let emprendedores =
     JSON.parse(
       localStorage.getItem("emprendedores")
     ) || [];
 
+
   const formulario =
-    document.getElementById("formEmprendedor");
+    document.getElementById(
+      "formEmprendedor"
+    );
+
 
   function fechaHoy() {
 
     const hoy = new Date();
 
-    const anio = hoy.getFullYear();
+    const anio =
+      hoy.getFullYear();
 
     const mes =
-      String(hoy.getMonth() + 1).padStart(2, "0");
+      String(
+        hoy.getMonth() + 1
+      ).padStart(2, "0");
 
     const dia =
-      String(hoy.getDate()).padStart(2, "0");
+      String(
+        hoy.getDate()
+      ).padStart(2, "0");
 
     return `${anio}-${mes}-${dia}`;
   }
+
 
   function fechaRegistroPermitida() {
 
@@ -785,6 +1000,7 @@
       : hoy;
   }
 
+
   function colocarFechaActual() {
 
     const campoFecha =
@@ -794,175 +1010,270 @@
       FECHA_INICIO_REGISTRO;
 
     if (!campoFecha.value) {
+
       campoFecha.value =
         fechaRegistroPermitida();
     }
   }
 
+
   colocarFechaActual();
+
+
+  /* NOMBRE CON MAYÚSCULAS */
 
   const nombreInput =
     document.getElementById("nombre");
 
-  nombreInput.addEventListener("input", function() {
 
-    const cursor = this.selectionStart;
+  nombreInput.addEventListener(
+    "input",
+    function() {
 
-    this.value =
-      this.value
-        .toLowerCase()
-        .replace(/(^|\s)\S/g, function(letra) {
-          return letra.toUpperCase();
-        });
+      const cursor =
+        this.selectionStart;
 
-    this.setSelectionRange(cursor, cursor);
-  });
+      this.value =
+        this.value
+          .toLowerCase()
+          .replace(
+            /(^|\s)\S/g,
+            function(letra) {
+              return letra.toUpperCase();
+            }
+          );
+
+      this.setSelectionRange(
+        cursor,
+        cursor
+      );
+    }
+  );
+
+
+  /* IDENTIDAD */
 
   const identidadInput =
-    document.getElementById("identidad");
+    document.getElementById(
+      "identidad"
+    );
 
-  identidadInput.addEventListener("input", function() {
 
-    let numeros =
-      this.value
-        .replace(/\D/g, "")
-        .slice(0, 13);
+  identidadInput.addEventListener(
+    "input",
+    function() {
 
-    if (numeros.length <= 4) {
+      let numeros =
+        this.value
+          .replace(/\D/g, "")
+          .slice(0, 13);
 
-      this.value = numeros;
 
-    } else if (numeros.length <= 8) {
+      if (numeros.length <= 4) {
 
-      this.value =
-        numeros.slice(0,4)
-        + "-"
-        + numeros.slice(4);
+        this.value = numeros;
 
-    } else {
+      } else if (
+        numeros.length <= 8
+      ) {
 
-      this.value =
-        numeros.slice(0,4)
-        + "-"
-        + numeros.slice(4,8)
-        + "-"
-        + numeros.slice(8,13);
+        this.value =
+          numeros.slice(0,4)
+          + "-"
+          + numeros.slice(4);
+
+      } else {
+
+        this.value =
+          numeros.slice(0,4)
+          + "-"
+          + numeros.slice(4,8)
+          + "-"
+          + numeros.slice(8,13);
+      }
     }
-  });
+  );
+
+
+  /* TELÉFONO */
 
   const telefonoInput =
-    document.getElementById("telefono");
+    document.getElementById(
+      "telefono"
+    );
 
-  telefonoInput.addEventListener("input", function() {
 
-    let numeros =
-      this.value
-        .replace(/\D/g, "")
-        .slice(0,8);
+  telefonoInput.addEventListener(
+    "input",
+    function() {
 
-    if (numeros.length <= 4) {
+      let numeros =
+        this.value
+          .replace(/\D/g, "")
+          .slice(0,8);
 
-      this.value = numeros;
 
-    } else if (numeros.length <= 6) {
+      if (numeros.length <= 4) {
 
-      this.value =
-        numeros.slice(0,4)
-        + "-"
-        + numeros.slice(4);
+        this.value =
+          numeros;
 
-    } else {
+      } else if (
+        numeros.length <= 6
+      ) {
 
-      this.value =
-        numeros.slice(0,4)
-        + "-"
-        + numeros.slice(4,6)
-        + "-"
-        + numeros.slice(6,8);
+        this.value =
+          numeros.slice(0,4)
+          + "-"
+          + numeros.slice(4);
+
+      } else {
+
+        this.value =
+          numeros.slice(0,4)
+          + "-"
+          + numeros.slice(4,6)
+          + "-"
+          + numeros.slice(6,8);
+      }
     }
-  });
+  );
 
-  formulario.addEventListener("submit", function(event) {
 
-    event.preventDefault();
+  /* GUARDAR */
 
-    const fechaSeleccionada =
-      document.getElementById("fecha").value;
+  formulario.addEventListener(
+    "submit",
+    function(event) {
 
-    if (
-      fechaSeleccionada < FECHA_INICIO_REGISTRO
-    ) {
+      event.preventDefault();
 
-      alert(
-        "La fecha no puede ser anterior al 14 de septiembre de 2026."
-      );
 
-      return;
+      const fechaSeleccionada =
+        document
+          .getElementById("fecha")
+          .value;
+
+
+      if (
+        fechaSeleccionada <
+        FECHA_INICIO_REGISTRO
+      ) {
+
+        alert(
+          "La fecha no puede ser anterior al 14 de septiembre de 2026."
+        );
+
+        return;
+      }
+
+
+      const indiceEditar =
+        document
+          .getElementById(
+            "indiceEditar"
+          )
+          .value;
+
+
+      const emprendedor = {
+
+        nombre:
+          document
+            .getElementById("nombre")
+            .value.trim(),
+
+        identidad:
+          document
+            .getElementById("identidad")
+            .value.trim(),
+
+        telefono:
+          document
+            .getElementById("telefono")
+            .value.trim(),
+
+        municipio:
+          document
+            .getElementById("municipio")
+            .value.trim(),
+
+        colonia:
+          document
+            .getElementById("colonia")
+            .value.trim(),
+
+        emprendimiento:
+          document
+            .getElementById("emprendimiento")
+            .value.trim(),
+
+        rubro:
+          document
+            .getElementById("rubro")
+            .value.trim(),
+
+        fecha:
+          fechaSeleccionada,
+
+        observaciones:
+          document
+            .getElementById("observaciones")
+            .value.trim()
+      };
+
+
+      if (indiceEditar === "") {
+
+        emprendedores.push(
+          emprendedor
+        );
+
+        alert(
+          "Emprendedor registrado correctamente."
+        );
+
+      } else {
+
+        emprendedores[
+          indiceEditar
+        ] = emprendedor;
+
+        alert(
+          "Ficha actualizada correctamente."
+        );
+      }
+
+
+      guardarDatos();
+
+      limpiarFormulario();
+
+      mostrarEmprendedores();
     }
+  );
 
-    const indiceEditar =
-      document.getElementById("indiceEditar").value;
-
-    const emprendedor = {
-
-      nombre:
-        document.getElementById("nombre").value.trim(),
-
-      identidad:
-        document.getElementById("identidad").value.trim(),
-
-      telefono:
-        document.getElementById("telefono").value.trim(),
-
-      municipio:
-        document.getElementById("municipio").value.trim(),
-
-      colonia:
-        document.getElementById("colonia").value.trim(),
-
-      emprendimiento:
-        document.getElementById("emprendimiento").value.trim(),
-
-      rubro:
-        document.getElementById("rubro").value.trim(),
-
-      fecha:
-        fechaSeleccionada,
-
-      observaciones:
-        document.getElementById("observaciones").value.trim()
-    };
-
-    if (indiceEditar === "") {
-
-      emprendedores.push(emprendedor);
-
-      alert("Emprendedor registrado correctamente.");
-
-    } else {
-
-      emprendedores[indiceEditar] = emprendedor;
-
-      alert("Ficha actualizada correctamente.");
-    }
-
-    guardarDatos();
-    limpiarFormulario();
-    mostrarEmprendedores();
-  });
 
   function guardarDatos() {
 
     localStorage.setItem(
       "emprendedores",
-      JSON.stringify(emprendedores)
+      JSON.stringify(
+        emprendedores
+      )
     );
   }
+
+
+  /* MOSTRAR TABLA */
 
   function mostrarEmprendedores() {
 
     const tabla =
-      document.getElementById("tablaEmprendedores");
+      document.getElementById(
+        "tablaEmprendedores"
+      );
+
 
     const busqueda =
       document
@@ -970,42 +1281,58 @@
         .value
         .toLowerCase();
 
+
     tabla.innerHTML = "";
 
+
     const resultados =
-      emprendedores.filter(function(e) {
+      emprendedores.filter(
+        function(e) {
 
-        return (
+          return (
 
-          (e.nombre || "")
-            .toLowerCase()
-            .includes(busqueda)
+            (e.nombre || "")
+              .toLowerCase()
+              .includes(busqueda)
 
-          ||
+            ||
 
-          (e.emprendimiento || "")
-            .toLowerCase()
-            .includes(busqueda)
+            (e.emprendimiento || "")
+              .toLowerCase()
+              .includes(busqueda)
 
-          ||
+            ||
 
-          (e.municipio || "")
-            .toLowerCase()
-            .includes(busqueda)
+            (e.municipio || "")
+              .toLowerCase()
+              .includes(busqueda)
 
-          ||
+            ||
 
-          (e.rubro || "")
-            .toLowerCase()
-            .includes(busqueda)
-        );
-      });
+            (e.colonia || "")
+              .toLowerCase()
+              .includes(busqueda)
 
-    if (resultados.length === 0) {
+            ||
+
+            (e.rubro || "")
+              .toLowerCase()
+              .includes(busqueda)
+          );
+        }
+      );
+
+
+    if (
+      resultados.length === 0
+    ) {
 
       tabla.innerHTML = `
         <tr>
-          <td colspan="10" class="mensaje-vacio">
+          <td
+            colspan="10"
+            class="mensaje-vacio"
+          >
             No hay emprendedores registrados.
           </td>
         </tr>
@@ -1013,57 +1340,74 @@
 
     } else {
 
-      resultados.forEach(function(e) {
+      resultados.forEach(
+        function(e) {
 
-        const indiceReal =
-          emprendedores.indexOf(e);
+          const indiceReal =
+            emprendedores.indexOf(e);
 
-        const fila =
-          document.createElement("tr");
 
-        fila.innerHTML = `
-          <td>${e.nombre || "-"}</td>
-          <td>${e.identidad || "-"}</td>
-          <td>${e.telefono || "-"}</td>
-          <td>${e.municipio || "-"}</td>
-          <td>${e.colonia || "-"}</td>
-          <td>${e.emprendimiento || "-"}</td>
-          <td>${e.rubro || "-"}</td>
-          <td>${e.fecha || "-"}</td>
-          <td>${e.observaciones || "-"}</td>
+          const fila =
+            document.createElement(
+              "tr"
+            );
 
-          <td>
 
-            <button
-              class="btn-editar"
-              onclick="editarEmprendedor(${indiceReal})"
-            >
-              Editar
-            </button>
+          fila.innerHTML = `
+            <td>${e.nombre || "-"}</td>
+            <td>${e.identidad || "-"}</td>
+            <td>${e.telefono || "-"}</td>
+            <td>${e.municipio || "-"}</td>
+            <td>${e.colonia || "-"}</td>
+            <td>${e.emprendimiento || "-"}</td>
+            <td>${e.rubro || "-"}</td>
+            <td>${e.fecha || "-"}</td>
+            <td>${e.observaciones || "-"}</td>
 
-            <button
-              class="btn-eliminar"
-              onclick="eliminarEmprendedor(${indiceReal})"
-            >
-              Eliminar
-            </button>
+            <td>
 
-          </td>
-        `;
+              <button
+                class="btn-editar"
+                onclick="editarEmprendedor(${indiceReal})"
+              >
+                Editar
+              </button>
 
-        tabla.appendChild(fila);
-      });
+              <button
+                class="btn-eliminar"
+                onclick="eliminarEmprendedor(${indiceReal})"
+              >
+                Eliminar
+              </button>
+
+            </td>
+          `;
+
+
+          tabla.appendChild(
+            fila
+          );
+        }
+      );
     }
 
-    document.getElementById("contador").textContent =
+
+    document
+      .getElementById("contador")
+      .textContent =
       "Total: " +
       emprendedores.length +
       " emprendedores";
   }
 
+
+  /* EDITAR */
+
   function editarEmprendedor(indice) {
 
-    const e = emprendedores[indice];
+    const e =
+      emprendedores[indice];
+
 
     document.getElementById("nombre").value =
       e.nombre || "";
@@ -1098,45 +1442,74 @@
     document.getElementById("btnGuardar").textContent =
       "Actualizar ficha";
 
+
     window.scrollTo({
       top: 0,
       behavior: "smooth"
     });
   }
 
+
+  /* ELIMINAR */
+
   function eliminarEmprendedor(indice) {
 
     const confirmar =
-      confirm("¿Deseas eliminar este emprendedor?");
+      confirm(
+        "¿Deseas eliminar este emprendedor?"
+      );
 
     if (!confirmar) {
       return;
     }
 
-    emprendedores.splice(indice, 1);
+
+    emprendedores.splice(
+      indice,
+      1
+    );
+
 
     guardarDatos();
 
     mostrarEmprendedores();
   }
 
+
+  /* LIMPIAR */
+
   function limpiarFormulario() {
 
     formulario.reset();
 
-    document.getElementById("indiceEditar").value = "";
 
-    document.getElementById("btnGuardar").textContent =
+    document
+      .getElementById("indiceEditar")
+      .value = "";
+
+
+    document
+      .getElementById("btnGuardar")
+      .textContent =
       "Guardar ficha";
+
 
     colocarFechaActual();
 
-    document.getElementById("nombre").focus();
+
+    document
+      .getElementById("nombre")
+      .focus();
   }
+
+
+  /* EXPORTAR */
 
   function exportarExcel() {
 
-    if (emprendedores.length === 0) {
+    if (
+      emprendedores.length === 0
+    ) {
 
       alert(
         "No hay emprendedores registrados para exportar."
@@ -1144,6 +1517,7 @@
 
       return;
     }
+
 
     let contenido =
       "\uFEFFFeria Aniversario de la Capital\n" +
@@ -1160,64 +1534,105 @@
       "Fecha de registro;" +
       "Observaciones\n";
 
-    emprendedores.forEach(function(e) {
 
-      const fila = [
+    emprendedores.forEach(
+      function(e) {
 
-        e.nombre || "",
-        e.identidad || "",
-        e.telefono || "",
-        e.municipio || "",
-        e.colonia || "",
-        e.emprendimiento || "",
-        e.rubro || "",
-        e.fecha || "",
-        e.observaciones || ""
+        const fila = [
 
-      ];
+          e.nombre || "",
+          e.identidad || "",
+          e.telefono || "",
+          e.municipio || "",
+          e.colonia || "",
+          e.emprendimiento || "",
+          e.rubro || "",
+          e.fecha || "",
+          e.observaciones || ""
 
-      contenido +=
-        fila.map(function(valor) {
+        ];
 
-          valor =
-            String(valor)
-              .replace(/"/g, '""')
-              .replace(/\n/g, " ");
 
-          return '"' + valor + '"';
+        contenido +=
+          fila.map(
+            function(valor) {
 
-        }).join(";") + "\n";
-    });
+              valor =
+                String(valor)
+                  .replace(
+                    /"/g,
+                    '""'
+                  )
+                  .replace(
+                    /\n/g,
+                    " "
+                  );
+
+              return (
+                '"' +
+                valor +
+                '"'
+              );
+            }
+          )
+          .join(";")
+          + "\n";
+      }
+    );
+
 
     const archivo =
       new Blob(
         [contenido],
         {
-          type: "text/csv;charset=utf-8;"
+          type:
+            "text/csv;charset=utf-8;"
         }
       );
 
+
     const url =
-      URL.createObjectURL(archivo);
+      URL.createObjectURL(
+        archivo
+      );
+
 
     const enlace =
-      document.createElement("a");
+      document.createElement(
+        "a"
+      );
 
-    enlace.href = url;
+
+    enlace.href =
+      url;
+
 
     enlace.download =
       "Feria_Aniversario_Capital_Emprendedores_" +
       fechaHoy() +
       ".csv";
 
-    document.body.appendChild(enlace);
+
+    document.body.appendChild(
+      enlace
+    );
+
 
     enlace.click();
 
-    document.body.removeChild(enlace);
 
-    URL.revokeObjectURL(url);
+    document.body.removeChild(
+      enlace
+    );
+
+
+    URL.revokeObjectURL(
+      url
+    );
   }
+
+
+  /* ENTER SIGUIENTE CAMPO */
 
   const camposFormulario =
     Array.from(
@@ -1226,34 +1641,52 @@
       )
     );
 
-  camposFormulario.forEach(function(campo, indice) {
 
-    campo.addEventListener("keydown", function(event) {
+  camposFormulario.forEach(
+    function(campo, indice) {
 
-      if (campo.tagName === "TEXTAREA") {
-        return;
-      }
+      campo.addEventListener(
+        "keydown",
+        function(event) {
 
-      if (event.key === "Enter") {
+          if (
+            campo.tagName === "TEXTAREA"
+          ) {
+            return;
+          }
 
-        event.preventDefault();
 
-        const siguiente =
-          camposFormulario[indice + 1];
+          if (
+            event.key === "Enter"
+          ) {
 
-        if (siguiente) {
+            event.preventDefault();
 
-          siguiente.focus();
 
-        } else {
+            const siguiente =
+              camposFormulario[
+                indice + 1
+              ];
 
-          document
-            .getElementById("btnGuardar")
-            .focus();
+
+            if (siguiente) {
+
+              siguiente.focus();
+
+            } else {
+
+              document
+                .getElementById(
+                  "btnGuardar"
+                )
+                .focus();
+            }
+          }
         }
-      }
-    });
-  });
+      );
+    }
+  );
+
 
   mostrarEmprendedores();
 
