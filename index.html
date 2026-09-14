@@ -124,6 +124,16 @@
       color: #333;
     }
 
+    .btn-exportar {
+      background: #166534;
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .btn-exportar:hover {
+      background: #14532d;
+    }
+
     .contador {
       display: inline-block;
       background: #ccfbf1;
@@ -132,6 +142,7 @@
       border-radius: 8px;
       font-weight: bold;
       margin-bottom: 16px;
+      margin-right: 10px;
     }
 
     .buscador {
@@ -334,6 +345,14 @@
     <div class="contador" id="contador">
       Total: 0 emprendedores
     </div>
+
+    <button
+      type="button"
+      class="btn-exportar"
+      onclick="exportarExcel()"
+    >
+      Exportar a Excel
+    </button>
 
     <input
       type="text"
@@ -567,6 +586,89 @@
     document.getElementById("btnGuardar").textContent =
       "Guardar ficha";
   }
+
+  function exportarExcel() {
+
+    if (emprendedores.length === 0) {
+      alert("No hay emprendedores registrados para exportar.");
+      return;
+    }
+
+    let contenido =
+      "\uFEFFNombre completo,Número de identidad,Teléfono,Ciudad o aldea,Nombre del emprendimiento,Actividad económica,Fecha de ingreso,Observaciones\n";
+
+    emprendedores.forEach(function(e) {
+
+      const fila = [
+        e.nombre,
+        e.identidad || "",
+        e.telefono,
+        e.municipio || "",
+        e.emprendimiento,
+        e.rubro || "",
+        e.fecha || "",
+        e.observaciones || ""
+      ];
+
+      contenido += fila.map(function(valor) {
+        valor = String(valor).replace(/"/g, '""');
+        return '"' + valor + '"';
+      }).join(",") + "\n";
+
+    });
+
+    const archivo = new Blob(
+      [contenido],
+      {
+        type: "text/csv;charset=utf-8;"
+      }
+    );
+
+    const enlace = document.createElement("a");
+
+    enlace.href = URL.createObjectURL(archivo);
+
+    enlace.download =
+      "Emprendedores_" +
+      new Date().toISOString().slice(0, 10) +
+      ".csv";
+
+    enlace.click();
+
+    URL.revokeObjectURL(enlace.href);
+  }
+
+  const camposFormulario = Array.from(
+    document.querySelectorAll(
+      '#formEmprendedor input:not([type="hidden"]), #formEmprendedor textarea'
+    )
+  );
+
+  camposFormulario.forEach((campo, indice) => {
+
+    campo.addEventListener("keydown", function(event) {
+
+      if (campo.tagName === "TEXTAREA") {
+        return;
+      }
+
+      if (event.key === "Enter") {
+
+        event.preventDefault();
+
+        const siguienteCampo =
+          camposFormulario[indice + 1];
+
+        if (siguienteCampo) {
+          siguienteCampo.focus();
+        } else {
+          document.getElementById("btnGuardar").focus();
+        }
+      }
+
+    });
+
+  });
 
   mostrarEmprendedores();
 </script>
